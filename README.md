@@ -1,2 +1,2 @@
-# text
-# 一些自己求学期间写的一些代码
+# learning_code
+# These codes were edited during the university by myself.
