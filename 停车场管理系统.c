@@ -151,6 +151,13 @@ int main(){
     	printf("请选择服务（停车输入0，离开输入1，退出系统输入2）：\n");
     	printf("-------------\t");
     	scanf("%d",&flag);
+	    
+	if(0 != flag && 1 != flag && 2 != flag){
+		//如果输入不是0，1，2中的一个，提示错误信息
+		printf("输入的命令有误，请重新选择！\n");
+		continue;
+	}
+	    
     	if(2 == flag) break; 			//如果输入了2，停止循环
     	getchar();					//吸收掉上一次输入时的回车
     	printf("请输入你的车牌号（不超过8位）：\n");
@@ -159,7 +166,7 @@ int main(){
     	printf("请输入停车/离开时间（24小时制，格式为时：分）\n");
     	printf("-------------\t");
     	scanf("%d:%d",&hour,&minute);				//输入时间
-    	time = hour + (float)minute/60;					//以小时为单位换算时间
+    	time = hour + (float)minute/60;				//以小时为单位换算时间
 
     	if(0 == flag){
 			//如果输入了0，安排停车
