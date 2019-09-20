@@ -134,7 +134,7 @@ void Out(SqStack *S, LQueue *Q, Car car){
 
 int main(){
     SqStack *S;
-    LQueue *Q;
+    LQueue *Q = (LQueue *)malloc(sizeof(LQueue));
     S = InitSqStack();
     //初始化队列，（使用调用函数方法时出错）
     Q->front = Q->rear = (QNode *)malloc(sizeof(QNode));
