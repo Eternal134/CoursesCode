@@ -1,4 +1,4 @@
-//迷宫问题
+//迷宫问题 
 
 #include<stdio.h>
 #include<string.h>
