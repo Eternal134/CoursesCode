@@ -1,7 +1,7 @@
 /*
-    ±¾³ÌĞòÖĞ¹²Ê¹ÓÃÏßĞÔË³Ğò±í¡¢Á´±í¡¢¹şÏ£±íµÄ¿ª·ÅµØÖ··¨¡¢¹şÏ£±íµÄÁ´µØÖ··¨ºÍ¶ş²æÅÅĞòÊ÷µÄ´æ´¢½á¹¹
-    Ã¿ÖÖ´æ´¢½á¹¹¶¼ÓĞÈıÖÖ´¦Àí·½·¨£º´´½¨¡¢´òÓ¡Êä³öºÍ¼ìË÷£¬º¯ÊıÃû³ÆµÄ¹Ø¼ü´Ê·Ö±ğ´øÓĞCreat¡¢Print¡¢Search
-    Ã¿ÖÖ´æ´¢½á¹¹µÄËùÓĞ¹¦ÄÜ¶¼·â×°ÔÚ´øÓĞ¹Ø¼ü´ÊFunctionµÄº¯ÊıÖĞ
+    æœ¬ç¨‹åºä¸­å…±ä½¿ç”¨çº¿æ€§é¡ºåºè¡¨ã€é“¾è¡¨ã€å“ˆå¸Œè¡¨çš„å¼€æ”¾åœ°å€æ³•ã€å“ˆå¸Œè¡¨çš„é“¾åœ°å€æ³•å’ŒäºŒå‰æ’åºæ ‘çš„å­˜å‚¨ç»“æ„
+    æ¯ç§å­˜å‚¨ç»“æ„éƒ½æœ‰ä¸‰ç§å¤„ç†æ–¹æ³•ï¼šåˆ›å»ºã€æ‰“å°è¾“å‡ºå’Œæ£€ç´¢ï¼Œå‡½æ•°åç§°çš„å…³é”®è¯åˆ†åˆ«å¸¦æœ‰Creatã€Printã€Search
+    æ¯ç§å­˜å‚¨ç»“æ„çš„æ‰€æœ‰åŠŸèƒ½éƒ½å°è£…åœ¨å¸¦æœ‰å…³é”®è¯Functionçš„å‡½æ•°ä¸­
 */
 
 #include<stdio.h>
@@ -13,73 +13,73 @@
 #define HashMax 30
 
 typedef struct
-{   //±íÊ¾Ã¿¸öµ¥´ÊµÄ³öÏÖÆµÂÊ
+{   //è¡¨ç¤ºæ¯ä¸ªå•è¯çš„å‡ºç°é¢‘ç‡
     char word[30];
     int sum;
 }WordData;
 
 typedef struct LNode
-{   //±íÊ¾Á´±íµÄ½Úµã
+{   //è¡¨ç¤ºé“¾è¡¨çš„èŠ‚ç‚¹
     WordData word_data;
     struct LNode *next;
 }LNode;
 
 typedef struct HNode
-{   //±íÊ¾¹şÏ£±íµÄ´æ´¢µ¥Ôª
+{   //è¡¨ç¤ºå“ˆå¸Œè¡¨çš„å­˜å‚¨å•å…ƒ
     WordData word_data;
     int flag;
 }HNode;
 
 int ListGetWords(WordData words[])
-{   //´ÓÎÄ¼şÖĞ¶ÁÈ¡ÎÄÕÂ²¢Í³¼Æ´ÊÆµ±£´æµ½Ë³Ğò±í
+{   //ä»æ–‡ä»¶ä¸­è¯»å–æ–‡ç« å¹¶ç»Ÿè®¡è¯é¢‘ä¿å­˜åˆ°é¡ºåºè¡¨
     FILE *fp;
     if((fp = fopen("InFile.txt", "r")) == NULL)
-    {   //´ò¿ªÎÄ¼ş
+    {   //æ‰“å¼€æ–‡ä»¶
         printf("open file failed");
         exit(0);
     }
-    int i = 0, flag = 1, j = 0, k, s = 0;        //flag = 1Ê±±íÊ¾¶ÁÈ¡µ¥´Ê, = 2Ê±´ú±íÒ»¸öµ¥´Ê¶ÁÈ¡½áÊø£¬s±íÊ¾²»Í¬µ¥´ÊµÄ×ÜÊı
-    char c;     //´ÓÎÄ¼ş¶ÁÈ¡×Ö·ûÔİÊ±±£´æµ½cÖĞ
-    char w[30];     //½«¶ÁÈ¡µÄµ¥´ÊÔİ´æµ½wÖĞ
-    w[0] = 0;      //wµÄÊ××Ö·ûÖÃÎª0
+    int i = 0, flag = 1, j = 0, k, s = 0;        //flag = 1æ—¶è¡¨ç¤ºè¯»å–å•è¯, = 2æ—¶ä»£è¡¨ä¸€ä¸ªå•è¯è¯»å–ç»“æŸï¼Œsè¡¨ç¤ºä¸åŒå•è¯çš„æ€»æ•°
+    char c;     //ä»æ–‡ä»¶è¯»å–å­—ç¬¦æš‚æ—¶ä¿å­˜åˆ°cä¸­
+    char w[30];     //å°†è¯»å–çš„å•è¯æš‚å­˜åˆ°wä¸­
+    w[0] = 0;      //wçš„é¦–å­—ç¬¦ç½®ä¸º0
     while(!feof(fp))
-    {   //±éÀúÎÄ¼ş
+    {   //éå†æ–‡ä»¶
         c = fgetc(fp);
         if(c == ' ' || c == ',' || c == '.' || c == '\n' || c == '\\')
         {   
             if(flag == 1)
-            {   //Èç¹ûÇ°Ò»Ê±¿ÌÕıÔÚÂ¼Èëµ¥´Ê£¬±íÊ¾Ò»¸öµ¥´ÊµÄ½áÊø
+            {   //å¦‚æœå‰ä¸€æ—¶åˆ»æ­£åœ¨å½•å…¥å•è¯ï¼Œè¡¨ç¤ºä¸€ä¸ªå•è¯çš„ç»“æŸ
                 flag = 2;
             }
             else    
-            {   //·ñÔòÊ²Ã´Ò²²»×ö
+            {   //å¦åˆ™ä»€ä¹ˆä¹Ÿä¸åš
                 flag = 0;
             }           
         }
         else
-        {   //Èç¹ûc²»ÊÇÌØÊâ·ûºÅ£¬±íÊ¾ÏÖÔÚÊÇÂ¼Èëµ¥´Ê×´Ì¬
+        {   //å¦‚æœcä¸æ˜¯ç‰¹æ®Šç¬¦å·ï¼Œè¡¨ç¤ºç°åœ¨æ˜¯å½•å…¥å•è¯çŠ¶æ€
             flag = 1;
         }
         if(flag == 1)
-        {   //Â¼Èëµ¥´Ê×´Ì¬
+        {   //å½•å…¥å•è¯çŠ¶æ€
             w[i] = c;
             i ++;
-            w[i] = 0;   //×Ö·û´²½áÎ²ÖÃÎª0
+            w[i] = 0;   //å­—ç¬¦åºŠç»“å°¾ç½®ä¸º0
         }
         else if(flag == 2)
-        {   //Èç¹ûÒ»¸öµ¥´Ê¸ÕÂ¼Èë½áÊø£¬
-            strlwr(w);      //½«Õâ¸öµ¥´Ê×ª»»³ÉĞ¡Ğ´
+        {   //å¦‚æœä¸€ä¸ªå•è¯åˆšå½•å…¥ç»“æŸï¼Œ
+            strlwr(w);      //å°†è¿™ä¸ªå•è¯è½¬æ¢æˆå°å†™
             for(k = 0; k < s; k ++)
-            {   //±éÀúË³Ğò±í£¬¿´Õâ¸öµ¥´ÊÊÇ·ñÒÑ´æÔÚ
+            {   //éå†é¡ºåºè¡¨ï¼Œçœ‹è¿™ä¸ªå•è¯æ˜¯å¦å·²å­˜åœ¨
                 if(strcmp(words[k].word, w) == 0)
-                {   //Èç¹ûÒÑ¾­´æÔÚ£¬½«¸Ãµ¥´ÊµÄ×ÜÊı+1
+                {   //å¦‚æœå·²ç»å­˜åœ¨ï¼Œå°†è¯¥å•è¯çš„æ€»æ•°+1
                     words[k].sum ++;
-                    i = 0;      //iÖÃÎª0£¬±íÊ¾Ë³Ğò±íÖĞÒÑÓĞ¸Ãµ¥´Ê
+                    i = 0;      //iç½®ä¸º0ï¼Œè¡¨ç¤ºé¡ºåºè¡¨ä¸­å·²æœ‰è¯¥å•è¯
                     break;
                 }
             }
             if(i)
-            {   //Èç¹ûi²»Îª0£¬½«¸Ãµ¥´Ê·Åµ½Ò»¸öĞÂµÄ´¢´æ¿Õ¼äÖĞ
+            {   //å¦‚æœiä¸ä¸º0ï¼Œå°†è¯¥å•è¯æ”¾åˆ°ä¸€ä¸ªæ–°çš„å‚¨å­˜ç©ºé—´ä¸­
                 s ++;
                 strcpy(words[s-1].word, w);
                 words[s-1].sum ++;
@@ -93,7 +93,7 @@ int ListGetWords(WordData words[])
 }
 
 int Partition(WordData words[], int low, int high)
-{   //¿ìËÙÅÅĞòÖĞ·µ»ØÊàÖáÎ»ÖÃ£¬¼û½Ì²Ä¡¶Êı¾İ½á¹¹¡·P245
+{   //å¿«é€Ÿæ’åºä¸­è¿”å›æ¢è½´ä½ç½®ï¼Œè§æ•™æã€Šæ•°æ®ç»“æ„ã€‹P245
     WordData word;
     word = words[low];
     char pivotkey[30];
@@ -116,7 +116,7 @@ int Partition(WordData words[], int low, int high)
 }
 
 void QuickListSort(WordData words[], int low, int high)
-{   //¿ìËÙÅÅĞò
+{   //å¿«é€Ÿæ’åº
     int pivotloc;
     if(low < high)
     {
@@ -127,7 +127,7 @@ void QuickListSort(WordData words[], int low, int high)
 }
 
 void PrintList(WordData words[], int words_sum)
-{   //´òÓ¡Ë³Ğò±íÖĞ´¢´æµÄĞÅÏ¢
+{   //æ‰“å°é¡ºåºè¡¨ä¸­å‚¨å­˜çš„ä¿¡æ¯
     int i;
     for (i = 0; i < words_sum; i++)
     {
@@ -136,7 +136,7 @@ void PrintList(WordData words[], int words_sum)
 }
 
 WordData SearchList(WordData words[], int words_sum, char word[])
-{   //Ë³Ğò±íÖĞµÄÕÛ°ë²éÕÒ£¬¡¶Êı¾İ½á¹¹¡·P193
+{   //é¡ºåºè¡¨ä¸­çš„æŠ˜åŠæŸ¥æ‰¾ï¼Œã€Šæ•°æ®ç»“æ„ã€‹P193
     int low = 0, high = words_sum, mid;
     while(low <= high)
     {
@@ -154,14 +154,14 @@ WordData SearchList(WordData words[], int words_sum, char word[])
             low = mid + 1;
         }
     }
-    //Èç¹ûÃ»ÓĞÕÒµ½£¬·µ»ØÕâ¸ö¿Õ±äÁ¿
+    //å¦‚æœæ²¡æœ‰æ‰¾åˆ°ï¼Œè¿”å›è¿™ä¸ªç©ºå˜é‡
     WordData word_null;
     word_null.sum = 0;
     return word_null;
 }
 
 LNode *CreatLinkList(WordData words[], int words_sum)
-{   //¸ù¾İË³Ğò±íµÄÄÚÈİ´´½¨Á´±í
+{   //æ ¹æ®é¡ºåºè¡¨çš„å†…å®¹åˆ›å»ºé“¾è¡¨
     LNode *rear, *p;
     LNode *W = (LNode *)malloc(sizeof(LNode));
     rear = W;
@@ -178,7 +178,7 @@ LNode *CreatLinkList(WordData words[], int words_sum)
 }
 
 void PrintLinkList(LNode *W)
-{   //´òÓ¡Á´±íÖĞµÄĞÅÏ¢
+{   //æ‰“å°é“¾è¡¨ä¸­çš„ä¿¡æ¯
     LNode *p;
     for(p = W->next; p->next; p = p->next)
     {
@@ -187,7 +187,7 @@ void PrintLinkList(LNode *W)
 }
 
 WordData SearchLinkList(LNode *W, char word[])
-{   //Ë³Ğò²éÕÒÁ´±í
+{   //é¡ºåºæŸ¥æ‰¾é“¾è¡¨
     LNode *p = W;
     for(;p->next; p = p->next)
     {
@@ -203,47 +203,47 @@ WordData SearchLinkList(LNode *W, char word[])
 
 void FunctionLinkList(WordData words[], int words_sum)
 {
-    LNode *W = CreatLinkList(words, words_sum);     //¶¨ÒåÁ´±í
+    LNode *W = CreatLinkList(words, words_sum);     //å®šä¹‰é“¾è¡¨
     char fs[20];
     int f;    
     while(1)    
     {
-        printf("\n$Á´±í$  ÇëÑ¡Ôñ¹¦ÄÜ£º\n1¡¢²é¿´´ÊÆµÍ³¼Æ½á¹û\n2¡¢²éÕÒµ¥´Ê\n0¡¢ÉÏÒ»²½\n>> ");
-        gets(fs);       //ÓÃ×Ö·û´®½ÓÊÕÊäÈë
+        printf("\n$é“¾è¡¨$  è¯·é€‰æ‹©åŠŸèƒ½ï¼š\n1ã€æŸ¥çœ‹è¯é¢‘ç»Ÿè®¡ç»“æœ\n2ã€æŸ¥æ‰¾å•è¯\n0ã€ä¸Šä¸€æ­¥\n>> ");
+        gets(fs);       //ç”¨å­—ç¬¦ä¸²æ¥æ”¶è¾“å…¥
         if(strlen(fs) != 1)
-        {   //Èç¹ûÊä³ö×Ö·û´®µÄ³¤¶È²»Îª1£¬¿Ï¶¨Î¥·¨
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+        {   //å¦‚æœè¾“å‡ºå­—ç¬¦ä¸²çš„é•¿åº¦ä¸ä¸º1ï¼Œè‚¯å®šè¿æ³•
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
-        f = fs[0] - '0';    //½«×Ö·û×ª»¯ÎªÊı×Ö
+        f = fs[0] - '0';    //å°†å­—ç¬¦è½¬åŒ–ä¸ºæ•°å­—
         if(f < 0 || f > 2)
-        {   //Èç¹ûÕâ¸öÊı×Ö²»ÔÚ0ºÍ2Ö®¼ä£¬Ò²Î¥·¨
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+        {   //å¦‚æœè¿™ä¸ªæ•°å­—ä¸åœ¨0å’Œ2ä¹‹é—´ï¼Œä¹Ÿè¿æ³•
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         switch(f)
         {
             case 1:
 
-                printf("\n$Á´±í$  ÎÄÕÂÖĞ³öÏÖµÄµ¥´Ê¼°ÆäÆµÂÊÈçÏÂ£º\n");
-                printf("µ¥´Ê         ×ÜÊı  \n");
+                printf("\n$é“¾è¡¨$  æ–‡ç« ä¸­å‡ºç°çš„å•è¯åŠå…¶é¢‘ç‡å¦‚ä¸‹ï¼š\n");
+                printf("å•è¯         æ€»æ•°  \n");
                 PrintLinkList(W);
                 break;
 
             case 2:
 
-                printf("\n$Á´±í$  ÊäÈëÄãÏëÒª²éÕÒµÄµ¥´Ê£º\n>> ");
+                printf("\n$é“¾è¡¨$  è¾“å…¥ä½ æƒ³è¦æŸ¥æ‰¾çš„å•è¯ï¼š\n>> ");
                 char word[30];
                 gets(word);
-                WordData search_result;     //½ÓÊÕ²éÕÒµÄ½á¹û
+                WordData search_result;     //æ¥æ”¶æŸ¥æ‰¾çš„ç»“æœ
                 search_result = SearchLinkList(W, word);
                 if(search_result.sum != 0)
                 {
-                    printf("\nµ¥´Ê%sÔÚÎÄÕÂÖĞ³öÏÖµÄ´ÎÊıÊÇ%d´Î\n", word, search_result.sum);
+                    printf("\nå•è¯%såœ¨æ–‡ç« ä¸­å‡ºç°çš„æ¬¡æ•°æ˜¯%dæ¬¡\n", word, search_result.sum);
                 }
                 else
                 {
-                    printf("\nµ¥´Ê%s²»´æÔÚ£¡\n", word);
+                    printf("\nå•è¯%sä¸å­˜åœ¨ï¼\n", word);
                 }
                 break;
 
@@ -261,31 +261,31 @@ void FunctionList(WordData words[], int words_sum)
     int f;
     while(1)
     {
-        printf("\n$Ë³Ğò±í$  ÇëÑ¡Ôñ¹¦ÄÜ£º\n1¡¢²é¿´´ÊÆµÍ³¼Æ½á¹û\n2¡¢²éÕÒµ¥´Ê\n0¡¢ÉÏÒ»²½\n>> ");
+        printf("\n$é¡ºåºè¡¨$  è¯·é€‰æ‹©åŠŸèƒ½ï¼š\n1ã€æŸ¥çœ‹è¯é¢‘ç»Ÿè®¡ç»“æœ\n2ã€æŸ¥æ‰¾å•è¯\n0ã€ä¸Šä¸€æ­¥\n>> ");
         gets(fs);
         if(strlen(fs) != 1)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         f = fs[0] - '0';
         if(f < 0 || f > 2)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         switch(f)
         {
             case 1:
                 
-                printf("\n$Ë³Ğò±í$  ÎÄÕÂÖĞ³öÏÖµÄµ¥´Ê¼°ÆäÆµÂÊÈçÏÂ£º\n");
-                printf("µ¥´Ê         ×ÜÊı  \n");
+                printf("\n$é¡ºåºè¡¨$  æ–‡ç« ä¸­å‡ºç°çš„å•è¯åŠå…¶é¢‘ç‡å¦‚ä¸‹ï¼š\n");
+                printf("å•è¯         æ€»æ•°  \n");
                 PrintList(words, words_sum);
                 break;
 
             case 2:
 
-                printf("\n$Ë³Ğò±í$  ÊäÈëÄãÏëÒª²éÕÒµÄµ¥´Ê£º\n>> ");
+                printf("\n$é¡ºåºè¡¨$  è¾“å…¥ä½ æƒ³è¦æŸ¥æ‰¾çš„å•è¯ï¼š\n>> ");
                 char word[20];
                 WordData search_result;
                 // getchar();
@@ -293,11 +293,11 @@ void FunctionList(WordData words[], int words_sum)
                 search_result = SearchList(words, words_sum , word);
                 if(search_result.sum != 0)
                 {
-                    printf("\nµ¥´Ê%sÔÚÎÄÕÂÖĞ³öÏÖµÄ´ÎÊıÊÇ%d´Î\n", word, search_result.sum);
+                    printf("\nå•è¯%såœ¨æ–‡ç« ä¸­å‡ºç°çš„æ¬¡æ•°æ˜¯%dæ¬¡\n", word, search_result.sum);
                 }
                 else
                 {
-                    printf("\nµ¥´Ê%s²»´æÔÚ£¡\n", word);
+                    printf("\nå•è¯%sä¸å­˜åœ¨ï¼\n", word);
                 }
                 break;
 
@@ -310,28 +310,28 @@ void FunctionList(WordData words[], int words_sum)
 }
 
 typedef struct HashLinkNode
-{   //Á´µØÖ··¨¹şÏ£±íµÄ½Úµã
+{   //é“¾åœ°å€æ³•å“ˆå¸Œè¡¨çš„èŠ‚ç‚¹
     WordData word;
-    HashLinkNode *next;
+    struct HashLinkNode *next;
 }HashLinkNode;
 
 int Hash(char word[])
-{   //¸ù¾İ×Ö·û´®µÄÊ××ÖÄ¸¼ÆËã¹şÏ£Öµ£¬Óë'a'µÄ²î¾ÍÊÇ¹şÏ£Öµ
+{   //æ ¹æ®å­—ç¬¦ä¸²çš„é¦–å­—æ¯è®¡ç®—å“ˆå¸Œå€¼ï¼Œä¸'a'çš„å·®å°±æ˜¯å“ˆå¸Œå€¼
     int hash;
     hash = word[0] - 'a';   
     return hash;
 }
 
 void CreatLinkHash(WordData words[], int words_sum, HashLinkNode H[])
-{   //´´½¨Á´µØÖ··¨¹şÏ£±í
+{   //åˆ›å»ºé“¾åœ°å€æ³•å“ˆå¸Œè¡¨
     int i, hash;
     HashLinkNode *h, *p = (HashLinkNode *)malloc(sizeof(HashLinkNode));
     for(i = 0; i < HashMax; i ++)
-    {   // ¹şÏ£±í³õÊ¼»¯
+    {   // å“ˆå¸Œè¡¨åˆå§‹åŒ–
         H[i].next = NULL;
     }
     for(i = 0; i < words_sum; i ++)
-    {   //°ÑË³Ğò±íÖĞµÄÔªËØ´¢´æµ½Á´µØÖ·¹şÏ£±íÖĞ
+    {   //æŠŠé¡ºåºè¡¨ä¸­çš„å…ƒç´ å‚¨å­˜åˆ°é“¾åœ°å€å“ˆå¸Œè¡¨ä¸­
         h = (HashLinkNode *)malloc(sizeof(HashLinkNode));
         h->word = words[i];
         h->next = NULL;
@@ -359,7 +359,7 @@ void PrintLinkHash(HashLinkNode H[])
 }
 
 WordData SearchLinkHash(HashLinkNode H[], char word[])
-{   //¸ù¾İÒªÕÒµÄ×Ö·û´®µÄ¹şÏ£Öµ¼ìË÷¹şÏ£±í
+{   //æ ¹æ®è¦æ‰¾çš„å­—ç¬¦ä¸²çš„å“ˆå¸Œå€¼æ£€ç´¢å“ˆå¸Œè¡¨
     int hash = Hash(word);
     HashLinkNode *h;
     for(h = &H[hash]; h; h = h->next)
@@ -375,10 +375,10 @@ WordData SearchLinkHash(HashLinkNode H[], char word[])
 }
 
 void CreatHashList(WordData words[], int words_sum, HNode HL[])
-{   //´´½¨¿ª·ÅµØÖ··¨¹şÏ£±í£¬ÓÃ¶ş´ÎÌ½²â·¨´¦Àí³åÍ»£¬¡¶Êı¾İ½á¹¹¡·P223
+{   //åˆ›å»ºå¼€æ”¾åœ°å€æ³•å“ˆå¸Œè¡¨ï¼Œç”¨äºŒæ¬¡æ¢æµ‹æ³•å¤„ç†å†²çªï¼Œã€Šæ•°æ®ç»“æ„ã€‹P223
     int i, j, h;
     for(i = 0; i <= MAX; i ++)
-    {   //³õÊ¼»¯¹şÏ£±í
+    {   //åˆå§‹åŒ–å“ˆå¸Œè¡¨
         HL[i].flag = 0;
         HL[i].word_data.sum = 0;
     }
@@ -393,15 +393,15 @@ void CreatHashList(WordData words[], int words_sum, HNode HL[])
         else
         {
             for(j = 1; j < sqrt(MAX); j ++)
-            {   //¶ş´ÎÌ½²â·¨´¦Àí³åÍ»
-                h = int(h + pow(-1, i+1) * pow(i, 2) + MAX) % MAX;
+            {   //äºŒæ¬¡æ¢æµ‹æ³•å¤„ç†å†²çª
+                h = (int)(h + pow(-1, i+1) * pow(i, 2) + MAX) % MAX;
                 if(HL[h].flag == 0)
                 {
                     HL[h].word_data = words[i];
                     HL[h].flag = 1;
                     break;
                 }
-                h = int(h + pow(-1, i) * pow(i, 2) + MAX) % MAX;
+                h = (int)(h + pow(-1, i) * pow(i, 2) + MAX) % MAX;
                 if(HL[h].flag == 0)
                 {
                     HL[h].word_data = words[i];
@@ -443,66 +443,66 @@ WordData SearchHashList(HNode HL[], char word[])
 void FunctionHash(WordData words[], int words_sum)
 {   
     char fs[20];
+    HNode HL[MAX];
     int f, flag = 0;
     while(1)
     {
-        printf("\nÇëÑ¡Ôñ¹şÏ£±íµÄ³åÍ»´¦Àí·½·¨£º\n1¡¢¿ª·ÅµØÖ··¨\n2¡¢Á´µØÖ··¨\n0¡¢ÉÏÒ»²½\n>> ");
+        printf("\nè¯·é€‰æ‹©å“ˆå¸Œè¡¨çš„å†²çªå¤„ç†æ–¹æ³•ï¼š\n1ã€å¼€æ”¾åœ°å€æ³•\n2ã€é“¾åœ°å€æ³•\n0ã€ä¸Šä¸€æ­¥\n>> ");
         gets(fs);
         if(strlen(fs) != 1)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         f = fs[0] - '0';
         if(f < 0 || f > 2)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         switch(f)
         {
             case 1:
-                //Ñ¡Ôñ¿ª·ÅµØÖ··¨¹şÏ£±í
-                HNode HL[MAX];
+                //é€‰æ‹©å¼€æ”¾åœ°å€æ³•å“ˆå¸Œè¡¨
                 CreatHashList(words, words_sum, HL);
                 while(1)
                 {
-                    printf("\n$¿ª·ÅµØÖ··¨¹şÏ£±í$  ÇëÑ¡Ôñ¹¦ÄÜ£º\n1¡¢²é¿´´ÊÆµÍ³¼Æ½á¹û\n2¡¢²éÕÒµ¥´Ê\n0¡¢ÉÏÒ»²½\n>> ");
+                    printf("\n$å¼€æ”¾åœ°å€æ³•å“ˆå¸Œè¡¨$  è¯·é€‰æ‹©åŠŸèƒ½ï¼š\n1ã€æŸ¥çœ‹è¯é¢‘ç»Ÿè®¡ç»“æœ\n2ã€æŸ¥æ‰¾å•è¯\n0ã€ä¸Šä¸€æ­¥\n>> ");
                     gets(fs);
                     if(strlen(fs) != 1)
                     {
-                        printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+                        printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
                         continue;
                     }
                     f = fs[0] - '0';
                     if(f < 0 || f > 2)
                     {
-                        printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+                        printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
                         continue;
                     }
                     switch(f)
                     {
                         case 1:
                             
-                            printf("\n$¿ª·ÅµØÖ··¨¹şÏ£±í$  ÎÄÕÂÖĞ³öÏÖµÄµ¥´Ê¼°ÆäÆµÂÊÈçÏÂ£º\n");
-                            printf("µ¥´Ê         ×ÜÊı  \n");
+                            printf("\n$å¼€æ”¾åœ°å€æ³•å“ˆå¸Œè¡¨$  æ–‡ç« ä¸­å‡ºç°çš„å•è¯åŠå…¶é¢‘ç‡å¦‚ä¸‹ï¼š\n");
+                            printf("å•è¯         æ€»æ•°  \n");
                             PrintHashList(HL);
                             break;
 
                         case 2:
 
-                            printf("\n$¿ª·ÅµØÖ··¨¹şÏ£±í$  ÊäÈëÄãÏëÒª²éÕÒµÄµ¥´Ê£º\n>> ");
+                            printf("\n$å¼€æ”¾åœ°å€æ³•å“ˆå¸Œè¡¨$  è¾“å…¥ä½ æƒ³è¦æŸ¥æ‰¾çš„å•è¯ï¼š\n>> ");
                             char word[20];
                             WordData search_result;
                             gets(word);
                             search_result = SearchHashList(HL, word);
                             if(search_result.sum != 0)
                             {
-                                printf("\nµ¥´Ê%sÔÚÎÄÕÂÖĞ³öÏÖµÄ´ÎÊıÊÇ%d´Î\n", word, search_result.sum);
+                                printf("\nå•è¯%såœ¨æ–‡ç« ä¸­å‡ºç°çš„æ¬¡æ•°æ˜¯%dæ¬¡\n", word, search_result.sum);
                             }
                             else
                             {
-                                printf("\nµ¥´Ê%s²»´æÔÚ£¡\n", word);
+                                printf("\nå•è¯%sä¸å­˜åœ¨ï¼\n", word);
                             }
                             break;
 
@@ -519,48 +519,48 @@ void FunctionHash(WordData words[], int words_sum)
                 break;     //case1   
 
             case 2:
-                //Ñ¡ÔñÁ´µØÖ··¨¹şÏ£±í
+                //é€‰æ‹©é“¾åœ°å€æ³•å“ˆå¸Œè¡¨
                 flag = 0;
                 HashLinkNode H[HashMax];
-                CreatLinkHash(words, words_sum, H);        //´´½¨Á´µØÖ··¨¹şÏ£±í
+                CreatLinkHash(words, words_sum, H);        //åˆ›å»ºé“¾åœ°å€æ³•å“ˆå¸Œè¡¨
                 while(1)
                 {
-                    printf("\n$Á´µØÖ··¨¹şÏ£±í$  ÇëÑ¡Ôñ¹¦ÄÜ£º\n1¡¢²é¿´´ÊÆµÍ³¼Æ½á¹û\n2¡¢²éÕÒµ¥´Ê\n0¡¢ÉÏÒ»²½\n>> ");
+                    printf("\n$é“¾åœ°å€æ³•å“ˆå¸Œè¡¨$  è¯·é€‰æ‹©åŠŸèƒ½ï¼š\n1ã€æŸ¥çœ‹è¯é¢‘ç»Ÿè®¡ç»“æœ\n2ã€æŸ¥æ‰¾å•è¯\n0ã€ä¸Šä¸€æ­¥\n>> ");
                     gets(fs);
                     if(strlen(fs) != 1)
                     {
-                        printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+                        printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
                         continue;
                     }
                     f = fs[0] - '0';
                     if(f < 0 || f > 2)
                     {
-                        printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+                        printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
                         continue;
                     }
                     switch(f)
                     {
                         case 1:
                             
-                            printf("\n$Á´µØÖ··¨¹şÏ£±í$  ÎÄÕÂÖĞ³öÏÖµÄµ¥´Ê¼°ÆäÆµÂÊÈçÏÂ£º\n");
-                            printf("µ¥´Ê         ×ÜÊı  \n");
+                            printf("\n$é“¾åœ°å€æ³•å“ˆå¸Œè¡¨$  æ–‡ç« ä¸­å‡ºç°çš„å•è¯åŠå…¶é¢‘ç‡å¦‚ä¸‹ï¼š\n");
+                            printf("å•è¯         æ€»æ•°  \n");
                             PrintLinkHash(H);
                             break;
 
                         case 2:
 
-                            printf("\n$Á´µØÖ··¨¹şÏ£±í$  ÊäÈëÄãÏëÒª²éÕÒµÄµ¥´Ê£º\n>> ");
+                            printf("\n$é“¾åœ°å€æ³•å“ˆå¸Œè¡¨$  è¾“å…¥ä½ æƒ³è¦æŸ¥æ‰¾çš„å•è¯ï¼š\n>> ");
                             char word[20];
                             WordData search_result;
                             gets(word);
                             search_result = SearchLinkHash(H, word);
                             if(search_result.sum != 0)
                             {
-                                printf("\nµ¥´Ê%sÔÚÎÄÕÂÖĞ³öÏÖµÄ´ÎÊıÊÇ%d´Î\n", word, search_result.sum);
+                                printf("\nå•è¯%såœ¨æ–‡ç« ä¸­å‡ºç°çš„æ¬¡æ•°æ˜¯%dæ¬¡\n", word, search_result.sum);
                             }
                             else
                             {
-                                printf("\nµ¥´Ê%s²»´æÔÚ£¡\n", word);
+                                printf("\nå•è¯%sä¸å­˜åœ¨ï¼\n", word);
                             }
                             break;
 
@@ -585,13 +585,13 @@ void FunctionHash(WordData words[], int words_sum)
 }
 
 typedef struct BSTNode
-{   //¶ş²æÊ÷½Úµã
+{   //äºŒå‰æ ‘èŠ‚ç‚¹
     WordData word;
     struct BSTNode *lchild, *rchild;
 }BSTNode, *BSTree;
 
 BSTree InsertBST(BSTree T, WordData word)
-{   //¶ş²æÊ÷µÄ²åÈëËã·¨£¬¡¶Êı¾İ½á¹¹¡·P201
+{   //äºŒå‰æ ‘çš„æ’å…¥ç®—æ³•ï¼Œã€Šæ•°æ®ç»“æ„ã€‹P201
     BSTNode *S;
     if(!T)
     {
@@ -612,7 +612,7 @@ BSTree InsertBST(BSTree T, WordData word)
 }
 
 BSTree CreatBST(WordData words[], int words_sum)
-{   //´´½¨¶ş²æÅÅĞòÊ÷
+{   //åˆ›å»ºäºŒå‰æ’åºæ ‘
     BSTree T = NULL;
     int i;
     for(i = 0; i <= words_sum; i ++)
@@ -636,7 +636,7 @@ void PrintBST(BSTree T)
 }
 
 BSTNode *SearchBST(BSTree T, char word[])
-{   //¶ş²æÊ÷µÄµİ¹é²éÕÒ£¬¡¶Êı¾İ½á¹¹¡·P199
+{   //äºŒå‰æ ‘çš„é€’å½’æŸ¥æ‰¾ï¼Œã€Šæ•°æ®ç»“æ„ã€‹P199
     if(!T || !strcmp(word, T->word.word))
     {
         return T;
@@ -658,42 +658,42 @@ void FunctionBST(WordData words[], int words_sum)
     int f;
     while(1)
     {
-        printf("\n$¶ş²æÅÅĞòÊ÷$  ÇëÑ¡Ôñ¹¦ÄÜ£º\n1¡¢²é¿´´ÊÆµÍ³¼Æ½á¹û\n2¡¢²éÕÒµ¥´Ê\n0¡¢ÉÏÒ»²½\n>> ");
+        printf("\n$äºŒå‰æ’åºæ ‘$  è¯·é€‰æ‹©åŠŸèƒ½ï¼š\n1ã€æŸ¥çœ‹è¯é¢‘ç»Ÿè®¡ç»“æœ\n2ã€æŸ¥æ‰¾å•è¯\n0ã€ä¸Šä¸€æ­¥\n>> ");
         gets(fs);
         if(strlen(fs) != 1)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         f = fs[0] - '0';
         if(f < 0 || f > 2)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         switch(f)
         {
             case 1:
                 
-                printf("\n$¶ş²æÅÅĞòÊ÷$  ÎÄÕÂÖĞ³öÏÖµÄµ¥´Ê¼°ÆäÆµÂÊÈçÏÂ£º\n");
-                printf("µ¥´Ê         ×ÜÊı  \n");
+                printf("\n$äºŒå‰æ’åºæ ‘$  æ–‡ç« ä¸­å‡ºç°çš„å•è¯åŠå…¶é¢‘ç‡å¦‚ä¸‹ï¼š\n");
+                printf("å•è¯         æ€»æ•°  \n");
                 PrintBST(T);
                 break;
 
             case 2:
 
-                printf("\n$¶ş²æÅÅĞòÊ÷$  ÊäÈëÄãÏëÒª²éÕÒµÄµ¥´Ê£º\n>> ");
+                printf("\n$äºŒå‰æ’åºæ ‘$  è¾“å…¥ä½ æƒ³è¦æŸ¥æ‰¾çš„å•è¯ï¼š\n>> ");
                 char word[20];
                 BSTNode *t;
                 gets(word);
                 t = SearchBST(T, word);
                 if(t)
                 {
-                    printf("\nµ¥´Ê%sÔÚÎÄÕÂÖĞ³öÏÖµÄ´ÎÊıÊÇ%d´Î\n", t->word.word, t->word.sum);
+                    printf("\nå•è¯%såœ¨æ–‡ç« ä¸­å‡ºç°çš„æ¬¡æ•°æ˜¯%dæ¬¡\n", t->word.word, t->word.sum);
                 }
                 else
                 {
-                    printf("\nµ¥´Ê%s²»´æÔÚ£¡\n", word);
+                    printf("\nå•è¯%sä¸å­˜åœ¨ï¼\n", word);
                 }
                 break;
 
@@ -711,21 +711,21 @@ int main()
     int words_sum, f;
     char fs[20];
     words_sum = ListGetWords(words);
-    printf("ÎÄÕÂ\"InFile\"µÄ´ÊÆµÍ³¼ÆÍê³É£¡\n");
+    printf("æ–‡ç« \"InFile\"çš„è¯é¢‘ç»Ÿè®¡å®Œæˆï¼\n");
     QuickListSort(words, 0, words_sum - 1);
     while(1)
     {
-        printf("\nÑ¡ÔñÒªÊ¹ÓÃµÄ´æ´¢½á¹¹£º\n1¡¢Ë³Ğò±í\n2¡¢Á´±í\n3¡¢¶ş²æÅÅĞòÊ÷\n4¡¢¹şÏ£±í\n0¡¢ÍË³ö\n>> ");
+        printf("\né€‰æ‹©è¦ä½¿ç”¨çš„å­˜å‚¨ç»“æ„ï¼š\n1ã€é¡ºåºè¡¨\n2ã€é“¾è¡¨\n3ã€äºŒå‰æ’åºæ ‘\n4ã€å“ˆå¸Œè¡¨\n0ã€é€€å‡º\n>> ");
         gets(fs);
         if(strlen(fs) != 1)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         f = fs[0] - '0';
         if(f < 0 || f > 4)
         {
-            printf("\nÎŞĞ§ÊäÈë£¬ÇëÖØĞÂÑ¡Ôñ£º\n");
+            printf("\næ— æ•ˆè¾“å…¥ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n");
             continue;
         }
         switch(f)
