@@ -64,7 +64,7 @@ int ListGetWords(WordData words[])
         {   //录入单词状态
             w[i] = c;
             i ++;
-            w[i] = 0;   //字符床结尾置为0
+            w[i] = 0;   //字符串结尾置为0
         }
         else if(flag == 2)
         {   //如果一个单词刚录入结束，
