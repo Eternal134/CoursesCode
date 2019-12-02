@@ -1,0 +1,98 @@
+from OpenGL.GL import *
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
+
+def myinit():
+
+	# /*设置背景颜色*/
+	glClearColor(1.0,1.0,1.0,0.0)
+
+
+def DrawPolygon():
+
+    glBegin(GL_POLYGON)
+    glVertex2f(20.0,10.0)
+    glVertex2f(60.0,30.0)
+    glVertex2f(70.0,45.0)
+    glVertex2f(40.0,75.0)
+    glVertex2f(10.0,60.0)
+    glEnd()
+
+
+def display():
+
+    fly=[
+        0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+        0x03,0x80,0x01,0xC0,0x06,0xC0,0x03,0x60,
+        0x04,0x60,0x06,0x20,0x04,0x30,0x0C,0x20,
+        0x04,0x18,0x18,0x20,0x04,0x0C,0x30,0x20,
+        0x04,0x06,0x60,0x20,0x44,0x03,0xC0,0x22,
+        0x44,0x01,0x80,0x22,0x44,0x01,0x80,0x22,
+        0x44,0x01,0x80,0x22,0x44,0x01,0x80,0x22,
+        0x44,0x01,0x80,0x22,0x44,0x01,0x80,0x22,
+        0x66,0x01,0x80,0x66,0x33,0x01,0x80,0xCC,
+        0x19,0x81,0x81,0x98,0x0C,0xC1,0x83,0x30,
+        0x07,0xe1,0x87,0xe0,0x03,0x3f,0xfc,0xc0,
+        0x03,0x31,0x8c,0xc0,0x03,0x33,0xcc,0xc0,
+        0x06,0x64,0x26,0x60,0x0c,0xcc,0x33,0x30,
+        0x18,0xcc,0x33,0x18,0x10,0xc4,0x23,0x08,
+        0x10,0x63,0xC6,0x08,0x10,0x30,0x0c,0x08,
+        0x10,0x18,0x18,0x08,0x10,0x00,0x00,0x08]
+
+    glClear(GL_COLOR_BUFFER_BIT)
+    # /*设置线段的颜色*/
+    glColor3f(0.0,0.0,0.0)
+
+    # /*第一个多边形采用点绘制*/
+    glPolygonMode(GL_FRONT,GL_POINT)
+    glTranslatef(20.0,10.0,0.0)  #平移
+    DrawPolygon()
+
+    # /*第二个多边形采用线绘制*/
+    glPolygonMode(GL_FRONT,GL_LINE)
+    glTranslatef(90.0,0.0,0.0)  # 平移
+    DrawPolygon()
+
+    # /*第三个多边形采用填充模式绘制*/
+    glPolygonMode(GL_FRONT,GL_FILL)
+    glTranslatef(90.0,0.0,0.0)  # 平移
+    DrawPolygon()
+
+    # /*第四个多边形为逆时针方向，并舍弃其背面*/
+    glFrontFace(GL_CW) #指定多边形的正面，GL_CW指定顶点顺时针方向为多边形的正面
+    glCullFace(GL_BACK)  #指明何种多边形在转换成屏幕坐标时要删除，GL_BACK背面
+    glEnable(GL_CULL_FACE)  #激活GL_CULL_FACE，即glCullFace
+    glTranslatef(-190.0,80.0,0.0) 
+    DrawPolygon()
+
+    # /*第五个多边形采用点划模式绘制*/
+    glFrontFace(GL_CCW) #GL_CCW指定顶点的逆时针方向为多边形的反面
+    glEnable(GL_POLYGON_STIPPLE)  # 激活GL_POLYGON_STIPPLE	
+    glPolygonStipple(fly)
+    glTranslatef(90.0,80.0,0.0)
+    DrawPolygon()
+
+    glFlush()
+
+def myreshape(w, h):
+
+    glViewport(0, 0, w, h)
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    gluOrtho2D(0.0,w,0.0,h)
+
+
+def main():
+
+    glutInit()
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
+    glutInitWindowSize(300,300)
+    glutInitWindowPosition(150,150)
+    glutCreateWindow("Polygon")
+    myinit()
+    glutDisplayFunc(display)
+    glutReshapeFunc(myreshape)
+    glutMainLoop()
+    return 0
+
+main()
