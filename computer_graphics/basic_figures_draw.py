@@ -1,5 +1,6 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
+import numpy as np
 
 def points_display():
 
@@ -155,7 +156,7 @@ def triangle():
     glEnd()
 
 def transfer():
-
+    # 视景体设置只能调用一次，不能放在函数里重复调用
     glOrtho(-100, 100, -100 ,100, -100, 100)
     glClear(GL_COLOR_BUFFER_BIT)
     glColor3f(1.0, 1.0, 1.0)
@@ -167,19 +168,33 @@ def transfer():
     glVertex2f(0.0, 100.0)
     glVertex2f(0.0, -100.0)
     glEnd()
-
+    """ 绘制原始三角形 """
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     glColor3f(255, 0, 255)
     triangle()
-
+    """ 旋转变换三角形 """
     glRotatef(200.0, 0.0, 0.0, 1.0)
     glColor3f(255, 69, 0)
     triangle()
-
+    """ 平移变化三角形 """
     glLoadIdentity()
     glColor3f(0, 255, 80)
     glTranslatef(-100, 0.0, 0.0)
+    triangle()
+    """ 错切变换三角形 """
+    m = np.array([1.0, 0.0, 1., 0., 
+                  0.0, 1.0, 1., 0.,
+                  0., 0., 1., 0.,
+                  0.0, 0., 0., 1.], np.float64)
+    glLoadIdentity()
+    glMultMatrixf(m)
+    glColor3f(50, 50, 50)
+    triangle()
+    """ 比例变换三角形 """
+    glLoadIdentity()
+    glColor3ub(255, 228, 181)
+    glScaled(0.5, 0.5, 1.0)
     triangle()
 
     glFlush()
