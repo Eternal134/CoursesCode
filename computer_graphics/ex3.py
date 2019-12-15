@@ -100,7 +100,7 @@ def main():
     # 实现Alt + c关闭程序
     glutKeyboardFunc(keyboard)
     if len(vexs) == 4:
-        drawSquare()
+        glutPostRedisplay(drawSquare)
     myinit()
     glutMainLoop()
 
