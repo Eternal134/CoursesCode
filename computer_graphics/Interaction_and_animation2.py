@@ -1,8 +1,7 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
-# 全局变量记录颜色选择和形状选择
-color_mode = 0
+# 全局变量记录形状选择
 shape_mode = 0
 
 def display():
@@ -23,7 +22,7 @@ def process_menu_events(value):
     if value == 1:
         
         glLoadIdentity()
-        color_mode = 0
+        glColor3f(1.0, 1.0, 1.0)
         draw_figure(shape_mode)
 
 
@@ -31,15 +30,6 @@ def draw_figure(value):
     ''' 根据选择的图元绘制相应的图形，并记录选择 '''
     global shape_mode
     shape_mode = value
-    # 根据全局变量color_mode的值选择不同的颜色
-    if color_mode == 1:
-        glColor3ub(255, 48, 48)
-    elif color_mode == 2:
-        glColor3ub(255, 182, 193)
-    elif color_mode == 3:
-        glColor3ub(0, 191, 255)
-    elif color_mode == 0:
-        glColor3f(1.0, 1.0, 1.0)
 
     if value == 1:
         # 线段
@@ -50,7 +40,6 @@ def draw_figure(value):
         glVertex2f(0.5, 0.0)
         glEnd()
 
-        glFlush()
 
     if value == 2:
         # 三角形
@@ -62,7 +51,6 @@ def draw_figure(value):
         glVertex2f(0.0, 0.289)
         glEnd()
 
-        glFlush()
 
     if value == 3:
         # 矩形
@@ -74,14 +62,21 @@ def draw_figure(value):
         glVertex2f(0.5, 0.5)
         glVertex2f(0.5, -0.5)
         glEnd()
-
-        glFlush()
+        
+    glFlush()
 
 
 def figure_color_change(value):
-    ''' 选择颜色，将值赋给全局变量color_mode，具体效果在draw_figure函数中体现 '''
-    global color_mode
-    color_mode = value
+    ''' 选择颜色 '''
+    if value == 1:
+        glColor3ub(255, 48, 48)
+        
+    elif value == 2:
+        glColor3ub(255, 182, 193)
+        
+    elif value == 3:
+        glColor3ub(0, 191, 255)
+        
     draw_figure(shape_mode)
 
 
