@@ -1,1 +1,1 @@
-display
+draw_figure
