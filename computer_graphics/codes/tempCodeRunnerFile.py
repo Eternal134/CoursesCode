@@ -1,1 +1,2 @@
-draw_figure
+
+    glShadeModel(GL_SMOOTH
