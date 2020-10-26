@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import fftpack
 
 f0 = 4              # 模拟信号频率
 fs = 200            # 采样频率
 T = 1 / fs          # 采样周期
-a = -0.99           # 滤波参数
+a = -1.5           # 滤波参数
 N = 200             # 采样个数
 t = np.linspace(0, (N - 1) * T, N)                  # 采样时间分量
 x = [np.sin(np.pi * 2 * f0 * n) for n in t]         # 采样的幅度
@@ -16,12 +17,25 @@ y = [x[0]]          # 滤波后的结果，首元素设为x[0]，方便迭代法
 for n in range(1, N):
     # 迭代法求解差分方程
     y.append(x[n] - a * y[n - 1])
+X = fftpack.fftshift(fftpack.fft(x))
+Y = fftpack.fftshift(fftpack.fft(y))
+f = np.linspace(-fs / 2, fs / 2 - fs / N, N)
 
-plt.subplot(311)
-plt.plot(t, x)
+plt.figure(dpi = 200)
+
+plt.subplot(711)
+plt.plot(t, x, c = 'pink', linewidth = 1)
 plt.xlabel('time / s')
 
-plt.subplot(313)
-plt.plot(t, y)
+plt.subplot(713)
+plt.stem(f, abs(X))
+plt.xlabel('Frequency/hz')
+
+plt.subplot(715)
+plt.plot(t, y, c = 'pink', linewidth = 1)
 plt.xlabel('time / s')
+
+plt.subplot(717)
+plt.stem(f, abs(Y))
+plt.xlabel('Frequency/hz')
 plt.show()
