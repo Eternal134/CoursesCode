@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 禁止编辑
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // 日志对话框大小
-    int width = 600, hight = 400;
+    int width = 900, hight = 600;
     dia->setFixedSize(width, hight);
     dia->setWindowTitle("日志");
     // 设置日志对话框中的第一个表格
@@ -136,8 +136,8 @@ MainWindow::MainWindow(QWidget *parent)
     });
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
+
     delete ui;
 }
 
@@ -198,7 +198,7 @@ void MainWindow::on_pushButton_2_clicked() {
         wid_completed_process->setItem(wid_completed_process->rowCount() - 1, 0,
                                       new QTableWidgetItem(first->name));
         wid_completed_process->setItem(wid_completed_process->rowCount() - 1, 1,
-                                       new QTableWidgetItem(QString::number(first->need_time)));
+                                      new QTableWidgetItem(QString::number(first->need_time)));
     }
     wid->insertRow(wid->rowCount());
     wid->setItem(wid->rowCount() - 1, 0, new QTableWidgetItem(first->name));
