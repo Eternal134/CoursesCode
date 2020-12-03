@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>110</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTableWidget" name="tw_input">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>700</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::CurrentChanged|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+   </property>
+   <property name="rowCount">
+    <number>1</number>
+   </property>
+   <property name="columnCount">
+    <number>8</number>
+   </property>
+   <row/>
+   <column>
+    <property name="text">
+     <string>报告人姓名</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>年龄</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>职称</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>单位</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>报告标题</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>报告地点</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>报告日期</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>举办单位</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="btn_confirm">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>700</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确认</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
