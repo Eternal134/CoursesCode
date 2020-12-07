@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>Bookmark.png</file>
+        <file>Cartoon-Feedback.png</file>
+        <file>Cartoon-Finish.png</file>
+        <file>CloseSquare.png</file>
+        <file>icon_23.png</file>
+        <file>jianshao1.png</file>
+        <file>liebiao.png</file>
+        <file>MinusSquare.png</file>
+        <file>PlusSquare.png</file>
+        <file>tianjia1.png</file>
+    </qresource>
+    <qresource prefix="/image">
+        <file>autumn-5704791_1920.jpg</file>
+        <file>logo2.0.jpg</file>
+    </qresource>
+</RCC>

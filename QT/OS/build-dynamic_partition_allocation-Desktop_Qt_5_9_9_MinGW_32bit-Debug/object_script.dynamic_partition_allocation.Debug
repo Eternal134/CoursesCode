@@ -1,0 +1,12 @@
+INPUT(
+./debug/btn_apply.o
+./debug/main.o
+./debug/mainwindow.o
+./debug/partition.o
+./debug/storer.o
+./debug/qrc_icons.o
+./debug/moc_btn_apply.o
+./debug/moc_mainwindow.o
+./debug/moc_partition.o
+./debug/moc_storer.o
+);
