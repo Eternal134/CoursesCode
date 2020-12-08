@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>fenpei.png</file>
+        <file>jiekou.png</file>
+        <file>jincheng.png</file>
+        <file>location.png</file>
+        <file>yinhang.png</file>
+        <file>zhihuan.png</file>
+    </qresource>
+</RCC>
