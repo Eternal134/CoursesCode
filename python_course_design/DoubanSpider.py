@@ -12,15 +12,15 @@ class DoubanSpider():
         self.s = requests.session()
         self.url = "https://book.douban.com/"
         self.basic_tag_url = "https://book.douban.com/tag/"
-        
+    
     def getTagBooks(self, tag, num):
         """根据书籍标签tag抓取num本书"""
-        index = 400
+        index = 500
+        i = 0
         for page_start in range(index, num + index, 20):
             # 要爬取的网址实例：https://book.douban.com/tag/文学?start=page_start/
             # page_start表示每页20本书中第一本书的序号
-            print(1)
-            # time.sleep(1)
+            time.sleep(1)
             url = self.basic_tag_url + tag + "?start=" + str(page_start)
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
                 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.120 Safari/537.36',
@@ -29,7 +29,6 @@ class DoubanSpider():
             r_html = etree.HTML(response.content)
             item_list = r_html.xpath("//li[@class='subject-item']")
             for item in item_list:
-                time.sleep(0.5)
                 book = [tag]
                 info = item.xpath("./div[2]")[0]
                 try:
@@ -47,9 +46,11 @@ class DoubanSpider():
                     book.append(re.findall(r'<span class="pl">定价:</span>\D+(\d+\.?\d+).*<br/>', info_str)[0])
                     book.append(re.findall(r'<span class="pl">页数:</span> (\d+).*<br/>', info_str)[0])
                     
-                    file = open('book_item.csv', 'a+', newline = '')
+                    file = open('book_item.csv', 'a+', newline = '', encoding='utf-8')
                     writer = csv.writer(file)
                     writer.writerow(book)
                     file.close()
+                    print(i)
+                    i += 1
                 except:
                     continue
