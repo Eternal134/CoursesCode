@@ -1,5 +1,5 @@
 import abc
-from ex3_image_filtering.SpatialSmoothing import SpatialSmoothing
+from ex3_image_filtering.spatial_smoothing import SpatialSmoothing
 import numpy as np
 
 class ImageEnhancement():

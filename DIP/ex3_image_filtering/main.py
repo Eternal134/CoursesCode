@@ -1,12 +1,13 @@
 import sys
 import os
+
 # 获取当前代码文件绝对路径
 current_dir = os.path.dirname(os.path.abspath(__file__))
 # 将需要导入模块代码文件相对于当前文件目录的绝对路径加入到sys.path中
 sys.path.append(os.path.join(current_dir, ".."))
 
-from ex3_image_filtering.image_fliter_factory import ImageFliterFactory
-from ex3_image_filtering.SpatialSmoothing import SpatialSmoothing
+from ex3_image_filtering.image_fliter_factory import ImageFilterFactory
+from ex3_image_filtering.spatial_smoothing import SpatialSmoothing
 
 import numpy as np
 import cv2 as cv
@@ -87,13 +88,13 @@ def lowPassFliter(imgAddedNoise) -> None:
     mask1 = np.full((3, 3), 1/9)
     mask2 = np.full((5, 5), 1/25)
     
-    fliter = ImageFliterFactory.lowPassFliterFactory()
+    fliter = ImageFilterFactory.lowPassFliterFactory()
     drawTwoGrayImages(imgAddedNoise, fliter.smoothing(imgAddedNoise, mask1), 
                         "3*3低通滤波法处理", resultPackage)
     drawTwoGrayImages(imgAddedNoise, fliter.smoothing(imgAddedNoise, mask2),
                         "5*5低通滤波法处理", resultPackage)
     
-    fliter = ImageFliterFactory.medianFliterFactory()
+    fliter = ImageFilterFactory.medianFliterFactory()
     drawTwoGrayImages(imgAddedNoise, fliter.smoothing(imgAddedNoise, mask1, threshold=64),
                         "3*3超限像素平滑法处理(T=64)", resultPackage)
     drawTwoGrayImages(imgAddedNoise, fliter.smoothing(imgAddedNoise, mask2, threshold=48),
@@ -106,7 +107,7 @@ def medianFliter(imgAddedNoise: np.ndarray) -> None:
     mask2 = np.full((5, 5), 1)
     resultPackage = "中值滤波法"
     
-    fliter = ImageFliterFactory.medianFliterFactory()
+    fliter = ImageFilterFactory.medianFliterFactory()
     drawTwoGrayImages(imgAddedNoise, fliter.smoothing(imgAddedNoise, mask1),
                         "3*3中值滤波平滑处理", package=resultPackage)
     drawTwoGrayImages(imgAddedNoise, fliter.smoothing(imgAddedNoise, mask2),
@@ -120,8 +121,18 @@ def enhanceImage(img: np.ndarray) -> None:
         
     """
     
-    enhancement = ImageFliterFactory.laplacianEnhancementFactory()
+    enhancement = ImageFilterFactory.laplacianEnhancementFactory()
     drawTwoGrayImages(img, enhancement.enhanceImage(img), "拉普拉斯算子图像增强", "图像增强")
+
+def frequencyFilter(img: np.ndarray) -> None:
+    """频率域滤波
+
+    Args:
+        img (np.ndarray): 原始图像
+    """
+    # 理想低通滤波器
+    frequencyFilter = ImageFilterFactory.idealLowPassFrequencyFilter()
+    drawTwoGrayImages(img, frequencyFilter.filter(img), "理想低通滤波器滤波", "频率域滤波")
 
 if __name__ == '__main__':
     
@@ -132,4 +143,5 @@ if __name__ == '__main__':
     
     # medianFliter(imgAddedNoise)
     # lowPassFliter(imgAddedNoise)
-    enhanceImage(img)
+    # enhanceImage(img)
+    frequencyFilter(imgAddedNoise)

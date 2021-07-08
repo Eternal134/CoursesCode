@@ -1,2 +1,10 @@
 venv
 ll_env
+DIP/ex3_image_filtering/__pycache__/__init__.cpython-36.pyc
+DIP/ex3_image_filtering/__pycache__/image_enhancement.cpython-36.pyc
+DIP/ex3_image_filtering/__pycache__/image_fliter_factory.cpython-36.pyc
+DIP/ex3_image_filtering/__pycache__/SmoothingFactory.cpython-36.pyc
+DIP/ex3_image_filtering/__pycache__/SpatialSmoothing.cpython-36.pyc
+learning_log/ll_env/Lib/site-packages/django/contrib/admin/static/admin/js/vendor/jquery/jquery.js
+learning_log/ll_env/Lib/site-packages/django/contrib/gis/static/gis/js/OLMapWidget.js
+.DS_Store
